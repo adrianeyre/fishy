@@ -1,10 +1,10 @@
 import React from 'react';
-import Fish from './fish';
+import Fishy from './fish';
 
 import './App.css';
 
 const App: React.FC = () => {
-	return <Fish initialPlayerSize={ 10 } />
+	return <Fishy initialPlayerSize={ 10 } />
 }
 
 export default App;

@@ -8,4 +8,11 @@ export default interface IPlayer {
 	direction: boolean;
 	score: number;
 	lives: number;
+	image: string[];
+	isAlive: boolean;
+	amountOfLives(): number
+	looseLife(): boolean;
+	addScore(extra: number): number;
+	move(x: number, y: number): void;
+	growPlayer(): void;
 }

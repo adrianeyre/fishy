@@ -46,9 +46,10 @@ $info-board-background: white;
 		.button-area {
 			position: absolute;
 			top: 80%;
-			left: calc(50% - 72px);
+			left: calc(50% - 104px);
 
 			button {
+				font-family: 'Press Start 2P', cursive;
 				-webkit-transition-duration: 0.4s; /* Safari */
 				transition-duration: 0.4s;
 				background-color: #008CBA;
