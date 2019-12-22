@@ -11,7 +11,8 @@ import fish4Right from '../images/fish4-right.gif';
 import fish5Left from '../images/fish5-left.gif';
 import fish5Right from '../images/fish5-right.gif';
 
-import IFish from '../interfaces/fish';
+import IFish from './interfaces/fish';
+import IFishProps from '../components/fishy/interfaces/fishy-props';
 
 export default class Fish implements IFish {
 	public key: string;
@@ -22,8 +23,10 @@ export default class Fish implements IFish {
 	public width: number;
 	public speed: number;
 	public direction: boolean;
-	public fishImage: string | undefined;
+	public fishImage: string;
 
+	private defaultFishWidthMultiplier: number;
+	private defaultFishHeightMultiplier: number;
 	private DEFAULT_FISH_WIDTH_MULTIPLIER: number = 20;
 	private DEFAULT_FISH_HEIGHT_MULTIPLIER: number = 10;
 	private DEFUALT_FISH_MAX_SIZE: number = 200;
@@ -36,18 +39,20 @@ export default class Fish implements IFish {
 		[ fish5Left, fish5Right ],
 	]
 
-	constructor(currentPlayerSize: number, playAreaWidth: number, playAreaHeight: number) {
+	constructor(config: IFishProps, currentPlayerSize: number, playAreaWidth: number, playAreaHeight: number) {
 		const randomSize = Math.floor(Math.random() * currentPlayerSize * 10) + 1;
 		
 		this.key = 'fish';
 		this.direction = Math.floor(Math.random() * 100) > 50;
 		this.size = randomSize > this.DEFUALT_FISH_MAX_SIZE ? this.DEFUALT_FISH_MAX_SIZE : randomSize;
+		this.speed = Math.floor(Math.random() * 5) + 1;
+		this.fishImage= this.fishImages[Math.floor(Math.random() * this.fishImages.length)][this.direction ? 0 : 1];
+		this.defaultFishWidthMultiplier = config.fishWidthMultiplier || this.DEFAULT_FISH_WIDTH_MULTIPLIER;
+		this.defaultFishHeightMultiplier = config.fishHeightMultiplier || this.DEFAULT_FISH_HEIGHT_MULTIPLIER;
 		this.height = this.newHeight(this.size);
 		this.width = this.newWidth(this.size);
 		this.x = this.direction ? playAreaWidth : -this.width;
 		this.y = Math.floor(Math.random() * playAreaHeight);
-		this.speed = Math.floor(Math.random() * 5) + 1;
-		this.fishImage= this.fishImages[Math.floor(Math.random() * this.fishImages.length)][this.direction ? 0 : 1];
 	}
 
 	public move = (): void => {
@@ -65,6 +70,6 @@ export default class Fish implements IFish {
 		playerX <= this.x + this.width;
 	
 
-	private newWidth = (size: number): number => size / 10 * this.DEFAULT_FISH_WIDTH_MULTIPLIER;
-	private newHeight = (size: number): number => size / 10 * this.DEFAULT_FISH_HEIGHT_MULTIPLIER;
+	private newWidth = (size: number): number => size / 10 * this.defaultFishWidthMultiplier;
+	private newHeight = (size: number): number => size / 10 * this.defaultFishHeightMultiplier;
 }

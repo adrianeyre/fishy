@@ -1,4 +1,4 @@
-export default interface IFishProps {
+export default interface IFishyProps {
 	initialPlayerSize?: number,
 	initialPlayerLives?: number,
 	fishHeightMultiplier?: number,
@@ -6,4 +6,6 @@ export default interface IFishProps {
 	fishMaxSize?: number,
 	playerMaxSize?: number,
 	maxFishOnScreen?: number,
+	fishTimerInterval?: number,
+	fishSpawnPercent?: number,
 }

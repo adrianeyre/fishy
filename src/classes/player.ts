@@ -1,7 +1,9 @@
+import IFishyProps from '../components/fishy/interfaces/fishy-props';
+
 import playerLeft from '../images/player-left.gif';
 import playerRight from '../images/player-right.gif';
 
-import IPlayer from '../interfaces/player';
+import IPlayer from './interfaces/player';
 
 export default class Player implements IPlayer {
 	public key: string;
@@ -16,21 +18,27 @@ export default class Player implements IPlayer {
 	public image: string[];
 	public isAlive: boolean;
 
-	private DEFAULT_FISH_WIDTH_MULTIPLIER: number = 20;
-	private DEFAULT_FISH_HEIGHT_MULTIPLIER: number = 10;
+	private defaultFishWidthMultiplier: number;
+	private defaultFishHeightMultiplier: number;
+	readonly  DEFAULT_FISH_WIDTH_MULTIPLIER: number = 20;
+	readonly  DEFAULT_FISH_HEIGHT_MULTIPLIER: number = 10;
+	readonly  INITIAL_PLAYER_SIZE: number = 10;
+	readonly  INITIAL_PLAYER_LIVES: number = 5;
 
-	constructor(object?: any) {
+	constructor(config: IFishyProps) {
 		this.key = 'player';
 		this.x = 0;
 		this.y = 0;
-		this.size = 10;
-		this.height = this.newHeight(this.size);
-		this.width = this.newWidth(this.size);
+		this.size = config.initialPlayerSize || this.INITIAL_PLAYER_SIZE;
 		this.direction = false;
 		this.score = 0;
-		this.lives = 5;
+		this.lives = config.initialPlayerLives || this.INITIAL_PLAYER_LIVES;
 		this.image = [playerLeft, playerRight];
 		this.isAlive = true;
+		this.defaultFishWidthMultiplier = config.fishWidthMultiplier || this.DEFAULT_FISH_WIDTH_MULTIPLIER;
+		this.defaultFishHeightMultiplier = config.fishHeightMultiplier || this.DEFAULT_FISH_HEIGHT_MULTIPLIER;
+		this.height = this.newHeight(this.size);
+		this.width = this.newWidth(this.size);
 	}
 
 	public amountOfLives = (): number => this.lives;
@@ -59,6 +67,6 @@ export default class Player implements IPlayer {
 		this.height = this.newHeight(this.size);
 	}
 
-	private newWidth = (size: number): number => size / 10 * this.DEFAULT_FISH_WIDTH_MULTIPLIER;
-	private newHeight = (size: number): number => size / 10 * this.DEFAULT_FISH_HEIGHT_MULTIPLIER;
+	private newWidth = (size: number): number => size / 10 * this.defaultFishWidthMultiplier;
+	private newHeight = (size: number): number => size / 10 * this.defaultFishHeightMultiplier;
 }

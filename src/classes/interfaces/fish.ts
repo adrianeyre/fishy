@@ -7,7 +7,7 @@ export default interface IFish {
 	width: number;
 	speed: number;
 	direction: boolean;
-	fishImage: string | undefined;
+	fishImage: string;
 	move(): void;
 	isEatingPlayer(playerX: number, playerY: number): boolean;
 }
