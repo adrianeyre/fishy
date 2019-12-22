@@ -88,7 +88,7 @@ export default class Fishy extends React.Component<IFishyProps, IFishyState> {
 	private setupPlayer = async (): Promise<IPlayer> => this.player = new Player(this.props);
 	private handleMouseMove = ({ pageX, pageY }: MouseEvent): void => this.player.move(pageX, pageY);
 	private handleTouchMove = (data: any): void => this.handleMouseMove(data.touches[0]);
-	private updatePlayerArea = () => this.setState(() => ({ playAreaWidth: get(this, 'container.offsetWidth', 200), playAreaHeight: get(this, 'container.offsetHeight', 100), }))
+	private updatePlayerArea = () => this.setState(() => ({ playAreaWidth: this.container && get(this, 'container.offsetWidth', 200), playAreaHeight: this.container && get(this, 'container.offsetHeight', 100), }))
 
 	private myTimer = async () => {
 		let fish = this.state.fish;
