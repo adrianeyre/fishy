@@ -22,4 +22,4 @@ $ npm start
 [![Screenshot](https://raw.githubusercontent.com/adrianeyre/fishy/master/src/images/screenshot2.png)](https://raw.githubusercontent.com/adrianeyre/fishy/master/src/images/screenshot2.png "Game View")
 
 ## <a name="Play">Play Fishy</a>
-* [http://adrianeyre.co.uk/fish](Fishy)
+* [Fishy](http://adrianeyre.co.uk/fish)
