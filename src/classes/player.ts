@@ -15,6 +15,7 @@ export default class Player implements IPlayer {
 	public direction: boolean;
 	public score: number;
 	public lives: number;
+	public initialPlayerSize: number;
 	public image: string[];
 	public isAlive: boolean;
 
@@ -31,7 +32,8 @@ export default class Player implements IPlayer {
 		this.key = 'player';
 		this.x = 0;
 		this.y = 0;
-		this.size = config.initialPlayerSize || this.INITIAL_PLAYER_SIZE;
+		this.initialPlayerSize = config.initialPlayerSize || this.INITIAL_PLAYER_SIZE;
+		this.size = this.initialPlayerSize
 		this.direction = false;
 		this.score = 0;
 		this.lives = config.initialPlayerLives || this.INITIAL_PLAYER_LIVES;
@@ -45,6 +47,12 @@ export default class Player implements IPlayer {
 	}
 
 	public amountOfLives = (): number => this.lives;
+
+	public resetPlayerSize = (): void => {
+		this.size = this.initialPlayerSize;
+		this.height = this.newHeight(this.size);
+		this.width = this.newWidth(this.size);
+	}
 
 	public looseLife = (): boolean => {
 		this.lives--;

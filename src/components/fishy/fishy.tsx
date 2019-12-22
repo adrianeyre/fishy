@@ -136,6 +136,7 @@ export default class Fishy extends React.Component<IFishyProps, IFishyState> {
 
 		if (!isPlayerAlive) return await this.setState(() => ({ isPlayerAlive: false }));
 
+		this.player.resetPlayerSize();
 		await this.setupFish();
 		await this.startTimer();
 		await this.setState(() => ({ isGameActive: true }));
