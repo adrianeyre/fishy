@@ -102,7 +102,6 @@ export default class Fishy extends React.Component<IFishyProps, IFishyState> {
 					await this.player.addScore(fish[fishIndex].size * 10);
 					await this.killFish(fishIndex);
 					const noEchosystem = await this.player.growPlayer();
-					console.log(noEchosystem)
 					await this.setState(() => ({ noEchosystem, isPlayerAlive: !noEchosystem }));
 					return;
 				} else {
