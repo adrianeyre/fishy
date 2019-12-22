@@ -20,10 +20,12 @@ export default class Player implements IPlayer {
 
 	private defaultFishWidthMultiplier: number;
 	private defaultFishHeightMultiplier: number;
-	readonly  DEFAULT_FISH_WIDTH_MULTIPLIER: number = 20;
-	readonly  DEFAULT_FISH_HEIGHT_MULTIPLIER: number = 10;
-	readonly  INITIAL_PLAYER_SIZE: number = 10;
-	readonly  INITIAL_PLAYER_LIVES: number = 5;
+	private defaultPlayerMaxSize: number;
+	readonly DEFAULT_FISH_WIDTH_MULTIPLIER: number = 20;
+	readonly DEFAULT_FISH_HEIGHT_MULTIPLIER: number = 10;
+	readonly INITIAL_PLAYER_SIZE: number = 10;
+	readonly INITIAL_PLAYER_LIVES: number = 5;
+	readonly DEFAULT_PLAYER_MAX_SIZE: number = 500;
 
 	constructor(config: IFishyProps) {
 		this.key = 'player';
@@ -37,6 +39,7 @@ export default class Player implements IPlayer {
 		this.isAlive = true;
 		this.defaultFishWidthMultiplier = config.fishWidthMultiplier || this.DEFAULT_FISH_WIDTH_MULTIPLIER;
 		this.defaultFishHeightMultiplier = config.fishHeightMultiplier || this.DEFAULT_FISH_HEIGHT_MULTIPLIER;
+		this.defaultPlayerMaxSize = config.playerMaxSize || this.DEFAULT_PLAYER_MAX_SIZE;
 		this.height = this.newHeight(this.size);
 		this.width = this.newWidth(this.size);
 	}
@@ -61,10 +64,12 @@ export default class Player implements IPlayer {
 		this.direction = this.x <= originalX
 	}
 
-	public growPlayer = (): void => {
+	public growPlayer = (): boolean => {
 		this.size ++;
 		this.width = this.newWidth(this.size);
 		this.height = this.newHeight(this.size);
+
+		return this.size >= this.defaultPlayerMaxSize;
 	}
 
 	private newWidth = (size: number): number => size / 10 * this.defaultFishWidthMultiplier;

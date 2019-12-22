@@ -22,6 +22,12 @@ export default class InfoBoard extends React.Component<IInfoBoardProps, {}> {
 				<div className="game-over-text">You scored { this.props.score }, better luck next time!</div>
 			</div> }
 
+			{ this.props.noEchosystem && <div className="eco-system-area">
+				<div className="eco-system-title">Game Over</div>
+				<div className="eco-system-text">You scored { this.props.score }</div>
+				<div className="eco-system-text">You ate the whole ecosystem! no more food for you!</div>
+			</div> }
+
 			<div className="fish-instructions">
 				You are a little fish minding your own business swimming around the sea, but in order to survive you must eat other fish! Be aware, you may only eat fish that are small than yourself. Larger fish will eat you up, so you must avoid them at all costs!
 			</div>

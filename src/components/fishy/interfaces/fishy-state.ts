@@ -7,4 +7,5 @@ export default interface IFishyState {
 	timer?: any;
 	isPlayerAlive: boolean;
 	isGameActive: boolean;
+	noEchosystem: boolean;
 }

@@ -14,5 +14,5 @@ export default interface IPlayer {
 	looseLife(): boolean;
 	addScore(extra: number): number;
 	move(x: number, y: number): void;
-	growPlayer(): void;
+	growPlayer(): boolean;
 }

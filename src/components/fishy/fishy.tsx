@@ -17,7 +17,6 @@ import './styles/fishy.scss';
 export default class Fishy extends React.Component<IFishyProps, IFishyState> {
 	private INITIAL_PLAYER_SIZE: number = this.props.initialPlayerSize || 10;
 	private DEFAULT_FISH_MAX_ON_SCREEN: number = this.props.maxFishOnScreen || 20;
-	private DEFAULT_PLAYER_MAX_SIZE: number = this.props.playerMaxSize || 500;
 	private DEFAULT_FISH_TIMER_INTERVAL: number = this.props.fishTimerInterval || 10;
 	private DEFAULT_FISH_SPAWN_PERCENT: number = this.props.fishSpawnPercent || 10;
 	private container: HTMLDivElement | null = null;
@@ -31,6 +30,7 @@ export default class Fishy extends React.Component<IFishyProps, IFishyState> {
 			playAreaHeight: 0,
 			isPlayerAlive: false,
 			isGameActive: false,
+			noEchosystem: false,
 			fish: [],
 		};
 
@@ -53,13 +53,10 @@ export default class Fishy extends React.Component<IFishyProps, IFishyState> {
 	}
 
 	public render() {
-		if (!this.player) return <div>Loading!</div>
-		if (this.player.size >= this.DEFAULT_PLAYER_MAX_SIZE) return <div>No more ecosystem!</div>
-
 		return <div className="fish-play-container" ref={(d) => { this.container = d }}>
 			<GameStatus score={ this.player.score } lives={ this.player.lives }/>
 
-			{ !this.state.isPlayerAlive && <InfoBoard gameOver={ this.player.lives < 1 } startGame={ this.startGame } score={ this.player.score } /> }
+			{ !this.state.isPlayerAlive && <InfoBoard gameOver={ this.player.lives < 1 } startGame={ this.startGame } score={ this.player.score } noEchosystem={ this.state.noEchosystem } /> }
 
 			{ this.state.isPlayerAlive && <div>
 				<DrawFish fish={ this.player } image={ this.player.image[this.player.direction ? 0 : 1] } />
@@ -74,7 +71,7 @@ export default class Fishy extends React.Component<IFishyProps, IFishyState> {
 		await this.setupPlayer();
 		await this.setupFish();
 		await this.startTimer();
-		await this.setState(() => ({ isPlayerAlive: true, isGameActive: true }));
+		await this.setState(() => ({ isPlayerAlive: true, isGameActive: true, noEchosystem: false }));
 	}
 
 	private setupFish = async (): Promise<void> => {
@@ -104,7 +101,9 @@ export default class Fishy extends React.Component<IFishyProps, IFishyState> {
 				if (this.player.size >= fish[fishIndex].size) {
 					await this.player.addScore(fish[fishIndex].size * 10);
 					await this.killFish(fishIndex);
-					await this.player.growPlayer();
+					const noEchosystem = await this.player.growPlayer();
+					console.log(noEchosystem)
+					await this.setState(() => ({ noEchosystem, isPlayerAlive: !noEchosystem }));
 					return;
 				} else {
 					this.looseLife();
