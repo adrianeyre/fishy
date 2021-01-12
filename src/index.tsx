@@ -6,7 +6,13 @@ import 'react-app-polyfill/stable';
 import Fishy from './components/fishy/fishy';
 
 import './index.css';
-import * as serviceWorker from './serviceWorker';
+import reportWebVitals from './reportWebVitals';
 
-ReactDOM.render(<Fishy />, document.getElementById('root'));
-serviceWorker.unregister();
+ReactDOM.render(
+    <React.StrictMode>
+        <Fishy />
+    </React.StrictMode>,
+    document.getElementById('root')
+);
+
+reportWebVitals();
