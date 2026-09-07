@@ -1,7 +1,7 @@
-import IFish from '../../../classes/interfaces/fish';
-import IPlayer from '../../../classes/interfaces/player';
+import type IFish from '../../../classes/interfaces/fish';
+import type IPlayer from '../../../classes/interfaces/player';
 
 export default interface IDrawFishProps {
-	fish: IFish | IPlayer
-	image: string;
+  fish: IFish | IPlayer;
+  image: string;
 }

@@ -11,65 +11,72 @@ import fish4Right from '../images/fish4-right.gif';
 import fish5Left from '../images/fish5-left.gif';
 import fish5Right from '../images/fish5-right.gif';
 
-import IFish from './interfaces/fish';
-import IFishProps from '../components/fishy/interfaces/fishy-props';
+import type IFish from './interfaces/fish';
+import type IFishProps from '../components/fishy/interfaces/fishy-props';
 
 export default class Fish implements IFish {
-	public key: string;
-	public x: number;
-	public y: number;
-	public size: number;
-	public height: number;
-	public width: number;
-	public speed: number;
-	public direction: boolean;
-	public fishImage: string;
+  public key: string;
+  public x: number;
+  public y: number;
+  public size: number;
+  public height: number;
+  public width: number;
+  public speed: number;
+  public direction: boolean;
+  public fishImage: string;
 
-	private defaultFishWidthMultiplier: number;
-	private defaultFishHeightMultiplier: number;
-	private DEFAULT_FISH_WIDTH_MULTIPLIER: number = 20;
-	private DEFAULT_FISH_HEIGHT_MULTIPLIER: number = 10;
-	private DEFUALT_FISH_MAX_SIZE: number = 200;
-	private fishImages: string[][] = [
-		[ fish0Left, fish0Right ],
-		[ fish1Left, fish1Right ],
-		[ fish2Left, fish2Right ],
-		[ fish3Left, fish3Right ],
-		[ fish4Left, fish4Right ],
-		[ fish5Left, fish5Right ],
-	]
+  private defaultFishWidthMultiplier: number;
+  private defaultFishHeightMultiplier: number;
+  private DEFAULT_FISH_WIDTH_MULTIPLIER: number = 20;
+  private DEFAULT_FISH_HEIGHT_MULTIPLIER: number = 10;
+  private DEFUALT_FISH_MAX_SIZE: number = 200;
+  private fishImages: string[][] = [
+    [fish0Left, fish0Right],
+    [fish1Left, fish1Right],
+    [fish2Left, fish2Right],
+    [fish3Left, fish3Right],
+    [fish4Left, fish4Right],
+    [fish5Left, fish5Right],
+  ];
 
-	constructor(config: IFishProps, currentPlayerSize: number, playAreaWidth: number, playAreaHeight: number) {
-		const randomSize = Math.floor(Math.random() * currentPlayerSize * 10) + 1;
-		
-		this.key = 'fish';
-		this.direction = Math.floor(Math.random() * 100) > 50;
-		this.size = randomSize > this.DEFUALT_FISH_MAX_SIZE ? this.DEFUALT_FISH_MAX_SIZE : randomSize;
-		this.speed = Math.floor(Math.random() * 5) + 1;
-		this.fishImage= this.fishImages[Math.floor(Math.random() * this.fishImages.length)][this.direction ? 0 : 1];
-		this.defaultFishWidthMultiplier = config.fishWidthMultiplier || this.DEFAULT_FISH_WIDTH_MULTIPLIER;
-		this.defaultFishHeightMultiplier = config.fishHeightMultiplier || this.DEFAULT_FISH_HEIGHT_MULTIPLIER;
-		this.height = this.newHeight(this.size);
-		this.width = this.newWidth(this.size);
-		this.x = this.direction ? playAreaWidth : -this.width;
-		this.y = Math.floor(Math.random() * playAreaHeight);
-	}
+  constructor(
+    config: IFishProps,
+    currentPlayerSize: number,
+    playAreaWidth: number,
+    playAreaHeight: number,
+  ) {
+    const randomSize = Math.floor(Math.random() * currentPlayerSize * 10) + 1;
 
-	public move = (): void => {
-		if (this.direction) {
-			this.x -= this.speed;
-		} else {
-			this.x += this.speed;
-		}
-	}
+    this.key = 'fish';
+    this.direction = Math.floor(Math.random() * 100) > 50;
+    this.size = randomSize > this.DEFUALT_FISH_MAX_SIZE ? this.DEFUALT_FISH_MAX_SIZE : randomSize;
+    this.speed = Math.floor(Math.random() * 5) + 1;
+    this.fishImage =
+      this.fishImages[Math.floor(Math.random() * this.fishImages.length)][this.direction ? 0 : 1];
+    this.defaultFishWidthMultiplier =
+      config.fishWidthMultiplier || this.DEFAULT_FISH_WIDTH_MULTIPLIER;
+    this.defaultFishHeightMultiplier =
+      config.fishHeightMultiplier || this.DEFAULT_FISH_HEIGHT_MULTIPLIER;
+    this.height = this.newHeight(this.size);
+    this.width = this.newWidth(this.size);
+    this.x = this.direction ? playAreaWidth : -this.width;
+    this.y = Math.floor(Math.random() * playAreaHeight);
+  }
 
-	public isEatingPlayer = (playerX: number, playerY: number): boolean =>
-		playerY >= this.y &&
-		playerY <= this.y + this.height &&
-		playerX >= this.x &&
-		playerX <= this.x + this.width;
-	
+  public move = (): void => {
+    if (this.direction) {
+      this.x -= this.speed;
+    } else {
+      this.x += this.speed;
+    }
+  };
 
-	private newWidth = (size: number): number => size / 10 * this.defaultFishWidthMultiplier;
-	private newHeight = (size: number): number => size / 10 * this.defaultFishHeightMultiplier;
+  public isEatingPlayer = (playerX: number, playerY: number): boolean =>
+    playerY >= this.y &&
+    playerY <= this.y + this.height &&
+    playerX >= this.x &&
+    playerX <= this.x + this.width;
+
+  private newWidth = (size: number): number => (size / 10) * this.defaultFishWidthMultiplier;
+  private newHeight = (size: number): number => (size / 10) * this.defaultFishHeightMultiplier;
 }

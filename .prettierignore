@@ -1,0 +1,5 @@
+dist-web
+coverage
+CHANGELOG.md
+package-lock.json
+src/**/__snapshots__

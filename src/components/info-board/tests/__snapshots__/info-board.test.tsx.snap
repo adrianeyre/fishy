@@ -1,3 +1,75 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Info Board Should render correctly 1`] = `ShallowWrapper {}`;
+exports[`Info Board > Should render correctly 1`] = `
+<div
+  class="fish-info-board"
+>
+  <div
+    class="fish-header"
+  >
+    <img
+      alt="player"
+      src="/src/images/player-right.gif"
+    />
+    <span
+      class="header-text"
+    >
+      Fishy
+    </span>
+    <img
+      alt="player"
+      src="/src/images/player-left.gif"
+    />
+  </div>
+  <div
+    class="game-over-area"
+  >
+    <div
+      class="game-over-title"
+    >
+      Game Over
+    </div>
+    <div
+      class="game-over-text"
+    >
+      You scored 
+      1000
+      , better luck next time!
+    </div>
+  </div>
+  <div
+    class="eco-system-area"
+  >
+    <div
+      class="eco-system-title"
+    >
+      Game Over
+    </div>
+    <div
+      class="eco-system-text"
+    >
+      You scored 
+      1000
+    </div>
+    <div
+      class="eco-system-text"
+    >
+      You ate the whole ecosystem! no more food for you!
+    </div>
+  </div>
+  <div
+    class="fish-instructions"
+  >
+    You are a little fish minding your own business swimming around the sea, but in order to survive you must eat other fish! Be aware, you may only eat fish that are small than yourself. Larger fish will eat you up, so you must avoid them at all costs!
+  </div>
+  <div
+    class="button-area"
+  >
+    <button
+      type="button"
+    >
+      Play Game
+    </button>
+  </div>
+</div>
+`;

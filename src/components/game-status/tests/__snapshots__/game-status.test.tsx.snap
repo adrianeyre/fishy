@@ -1,3 +1,45 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Game Status Should render correctly 1`] = `ShallowWrapper {}`;
+exports[`Game Status > Should render correctly 1`] = `
+<div
+  class="game-status"
+>
+  <div
+    class="game-status-left"
+  >
+    Score: 
+    1000
+  </div>
+  <div
+    class="game-status-right"
+  >
+    Lives:
+     
+    <img
+      alt="lives"
+      class="player-lives"
+      src="/src/images/player-left.gif"
+    />
+    <img
+      alt="lives"
+      class="player-lives"
+      src="/src/images/player-left.gif"
+    />
+    <img
+      alt="lives"
+      class="player-lives"
+      src="/src/images/player-left.gif"
+    />
+    <img
+      alt="lives"
+      class="player-lives"
+      src="/src/images/player-left.gif"
+    />
+    <img
+      alt="lives"
+      class="player-lives"
+      src="/src/images/player-left.gif"
+    />
+  </div>
+</div>
+`;
